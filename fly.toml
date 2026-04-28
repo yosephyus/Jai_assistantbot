@@ -1,0 +1,29 @@
+app = "jai-assistant"
+primary_region = "sin"
+
+[build]
+
+[deploy]
+  release_command = "openclaw gateway --bind 0.0.0.0 --port 18789 &"
+
+[http_service]
+  internal_port = 18789
+  force_https = true
+  auto_stop = false
+  auto_start = true
+
+[[services]]
+  internal_port = 18789
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+[[services]]
+  protocol = "udp"
+  internal_port = 18789

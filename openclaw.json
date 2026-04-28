@@ -1,0 +1,79 @@
+{
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "REPLACE_WITH_YOUR_GATEWAY_TOKEN"
+    },
+    "port": 18789,
+    "bind": "0.0.0.0",
+    "controlUi": {
+      "allowInsecureAuth": true
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "botToken": "REPLACE_WITH_YOUR_TELEGRAM_BOT_TOKEN",
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      },
+      "groupPolicy": "open",
+      "allowFrom": []
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/app/workspace",
+      "model": {
+        "primary": "minimax/MiniMax-M2.7"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "minimax": {
+        "baseUrl": "https://api.minimax.io/anthropic",
+        "models": [
+          {
+            "id": "MiniMax-M2.7",
+            "name": "MiniMax M2.7",
+            "reasoning": true,
+            "input": ["text"],
+            "cost": {
+              "input": 0.3,
+              "output": 1.2,
+              "cacheRead": 0.06,
+              "cacheWrite": 0.375
+            },
+            "contextWindow": 204800,
+            "maxTokens": 131072
+          }
+        ],
+        "api": "anthropic-messages",
+        "authHeader": true
+      }
+    }
+  },
+  "auth": {
+    "profiles": {
+      "minimax:global": {
+        "provider": "minimax",
+        "mode": "api_key"
+      }
+    }
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  }
+}
