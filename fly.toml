@@ -1,29 +1,40 @@
-app = "jai-assistant"
-primary_region = "sin"
+# fly.toml app configuration file generated for jai-assistant on 2026-04-28T20:37:56+07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'jai-assistant'
+primary_region = 'ams'
 
 [build]
 
 [deploy]
-  release_command = "openclaw gateway --bind 0.0.0.0 --port 18789 &"
+
 
 [http_service]
   internal_port = 18789
   force_https = true
-  auto_stop = false
-  auto_start = true
 
 [[services]]
+  protocol = ''
   internal_port = 18789
 
   [[services.ports]]
     port = 443
-    handlers = ["tls"]
+    handlers = ['tls']
 
   [[services.ports]]
     port = 80
-    handlers = ["http"]
+    handlers = ['http']
     force_https = true
 
 [[services]]
-  protocol = "udp"
+  protocol = 'udp'
   internal_port = 18789
+  ports = []
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 1024
