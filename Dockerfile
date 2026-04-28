@@ -19,4 +19,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD wget --no-verbose --tries=1 --spider http://localhost:18789/ || exit 1
 
 # Start gateway
-CMD ["openclaw", "gateway", "--bind", "0.0.0.0", "--port", "18789"]
+CMD ["openclaw", "gateway", "--bind", "lan", "--port", "18789"]
