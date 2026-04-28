@@ -10,7 +10,6 @@ WORKDIR /app
 COPY openclaw.json /app/
 
 # Make script executable
-RUN chmod +x /app/openclaw.sh
 
 # Expose gateway port
 EXPOSE 18789
