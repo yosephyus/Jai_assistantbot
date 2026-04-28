@@ -8,7 +8,6 @@ WORKDIR /app
 
 # Copy config files
 COPY openclaw.json /app/
-COPY openclaw.sh /app/
 
 # Make script executable
 RUN chmod +x /app/openclaw.sh
